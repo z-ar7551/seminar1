@@ -128,8 +128,8 @@ def main_worker(gpu, args):
             adjust_learning_rate(args, optimizer, loader, step)
             optimizer.zero_grad()
             with torch.cuda.amp.autocast():
-                loss = model.forward(y1, y2)
-            scaler.scale(loss).backward()
+                loss = model.forward(y1, y2) 
+            scaler.scale(loss).backward()        
             scaler.step(optimizer)
             scaler.update()
             if step % args.print_freq == 0:

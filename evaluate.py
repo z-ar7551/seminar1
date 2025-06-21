@@ -13,6 +13,7 @@ import signal
 import sys
 import time
 import urllib
+import pandas as pd
 
 from torch import nn, optim
 from torchvision import models, datasets, transforms
@@ -51,7 +52,8 @@ parser.add_argument('--checkpoint-dir', default='./checkpoint/lincls/', type=Pat
 def main():
     args = parser.parse_args()
     if args.train_percent in {1, 10}:
-        args.train_files = urllib.request.urlopen(f'https://raw.githubusercontent.com/google-research/simclr/master/imagenet_subsets/{args.train_percent}percent.txt').readlines()
+        data = pd.read_csv('EuroSAT/train.csv', dtype=str, index_col=False, nrows=1890)
+        args.train_files = data['Filename'].tolist()
     args.ngpus_per_node = torch.cuda.device_count()
     if 'SLURM_JOB_ID' in os.environ:
         signal.signal(signal.SIGUSR1, handle_sigusr1)
@@ -138,8 +140,8 @@ def main_worker(gpu, args):
     if args.train_percent in {1, 10}:
         train_dataset.samples = []
         for fname in args.train_files:
-            fname = fname.decode().strip()
-            cls = fname.split('_')[0]
+            cls = fname.split('/')[0]
+            fname = fname.split('/')[1] 
             train_dataset.samples.append(
                 (traindir / cls / fname, train_dataset.class_to_idx[cls]))
 
