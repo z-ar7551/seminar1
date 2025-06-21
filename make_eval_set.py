@@ -2,9 +2,12 @@ import os
 import shutil
 import pandas as pd
 
-# Paths
+"""
+Creating train and validation sets from the EuroSAT dataset csv files
+"""
+
 source_root = 'EuroSAT'
-val_csv = 'EuroSAT/train.csv'
+val_csv = 'EuroSAT/val.csv'
 dest_root = 'train'
 
 # Load validation image relative paths from CSV

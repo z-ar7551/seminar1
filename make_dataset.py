@@ -4,12 +4,16 @@ import numpy as np
 from PIL import Image
 from tqdm import tqdm
 
-# --- CONFIGURATION ---
+"""
+File that converts .zarr files to .png and 
+"""
+
+
 ZARR_DIR = "data/ssl4eo-s12/train/S2L2A"     # Folder with .zarr.zip files
-OUTPUT_DIR = "barlow_data/train"       # Output PNG images
-BAND_INDICES = [3, 2, 1]  # Sentinel-2: RGB = B4, B3, B2 → 0-based indices
+OUTPUT_DIR = "barlow_data/train"      # Output PNG images
+BAND_INDICES = [3, 2, 1] 
 CLIP_RANGE = (0, 3000)
-RESIZE = (224, 224)  # Output size for training (adjust if needed)
+RESIZE = (224, 224)  # Output size for training
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 zarr_files = sorted([f for f in os.listdir(ZARR_DIR) if f.endswith('.zarr')])
@@ -46,4 +50,3 @@ for idx, fname in enumerate(tqdm(zarr_files)):
 
     except Exception as e:
         print(f"Failed to process {fname}: {e}")
-
