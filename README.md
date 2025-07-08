@@ -40,6 +40,6 @@ python evaluate.py EuroSAT/train checkpoint/resnet50.pth --lr-classifier 0.3
 Train a linear probe on the representations learned by Barlow Twins. Finetune the weights of the resnet and use any training set training set.
 
 ```
-python evaluate.py barlow_data checkpoint/resnet50.pth --weights finetune --epochs 20 --lr-backbone 0.005 --lr-classifier 0.5 --weight-decay 0 --checkpoint-dir ./checkpoint/semisup/
+python evaluate.py EuroSAT/train checkpoint/resnet50.pth --weights finetune --epochs 20 --lr-backbone 0.005 --lr-classifier 0.5 --weight-decay 0 --checkpoint-dir ./checkpoint/semisup/
 ```
 
