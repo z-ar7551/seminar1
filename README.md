@@ -10,6 +10,7 @@ PyTorch implementation of [Barlow Twins](https://arxiv.org/abs/2103.03230) on th
   journal={arXiv preprint arXiv:2103.03230},
   year={2021}
 }
+````
 ### Setup
 Download the dataset and unzip the files.
 Run the make_dataset.py file to convert the .zarr files to .png
